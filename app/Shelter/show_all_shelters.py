@@ -3,7 +3,7 @@
 
 
 from flask import render_template
-from myapp import app
+import app
 
 
 @app.route('/show_all_shelters')

@@ -2,14 +2,21 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import pdb
 import unittest
-from myapp import app
+from os import path
+
+import sys
+import os.path
+# from os import path
+# sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from app import flask_app
+
 
 class TestMain(unittest.TestCase):
-
     def setUp(self):
-        self.app = app.test_client()
+        print __file__
+        self.app = flask_app.test_client()
         self.app.testing = True
 
     def test_welcome_page_root(self):
