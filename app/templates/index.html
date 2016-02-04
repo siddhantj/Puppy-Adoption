@@ -6,6 +6,23 @@
 </head>
 <body>
   <h1> Hello World</h1>
+  <input type="button" value="Show all shelters" onclick="show_all_shelter()">
+  <input type="button" value="Show all Puppies" onclick="show_all_puppies()">
+  <input type="button" value="Show all Adopters" onclick="show_all_adopters()">
+  <script>
+    function show_all_shelter() {
+      window.location = '/show_all_shelters'
+    }
+
+    function show_all_puppies() {
+      window.location = '/show_all_puppies'
+    }
+
+    function show_all_adopters() {
+      window.location = '/show_all_adopters'
+    }
+
+  </script>
 
 </body>
 </html>

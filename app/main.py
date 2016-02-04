@@ -6,9 +6,8 @@ from app import flask_app
 
 
 @flask_app.route('/')
-@flask_app.route('/index.html')
+@flask_app.route('/index.html', methods=['GET'])
 def welcome_page():
     # pdb.set_trace()
     return render_template('index.html')
-
 
