@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from sqlalchemy import ForeignKey, Integer, String, Column
 from sqlalchemy.orm import relationship
@@ -43,6 +43,7 @@ class Puppy(Base):
 class PuppyAdopter(Base):
     __tablename__ = 'puppy_adopter'
 
+    serial_no = Column(Integer, primary_key=True)
     puppy_id = Column(Integer, ForeignKey('puppy.puppy_id'))
     puppy = relationship('puppy', uselist=False, back_populates='puppy_profile')
     adopter_id = Column(Integer, ForeignKey('adopter.adopter_id'))
@@ -54,10 +55,14 @@ class Adopter(Base):
 
     adopter_id = Column(Integer, primary_key=True)
     adopter_name = Column(String(100), nullable=False)
-    puppy_id = Column(Integer, ForeignKey('puppy_adopter.puppy_id'))
+    puppy_id = Column(Integer, ForeignKey('puppy.puppy_id'))
     puppy_adopter = relationship('puppy_adopter', uselist=False, back_populates='adopter')
 
+if __name__ == '__main__':
+    engine = create_engine('postgresql+psycopg2://testdb:hello@localhost/production_dogshelter')
 
+    # Creates tables in the database. If tables are already present, it won't recreate them.
+    Base.metadata.create_all(engine)
     
 
 

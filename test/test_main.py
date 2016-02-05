@@ -6,7 +6,7 @@ import sys
 from os import path
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 # sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from app import flask_app
+from app import flask_app, main
 import runserver
 
 
@@ -15,6 +15,10 @@ class TestMain(unittest.TestCase):
         print __file__
         self.app = flask_app.test_client()
         self.app.testing = True
+        self.production_database_connect_str = 'postgresql+psycopg2://testdb:'\
+            'hello@localhost/production_dogshelter'
+        self.test_database_connect_str = 'postgres+psycopg2://testdb:hello@'\
+            'localhost/test_dogshelter'
 
     def test_welcome_page_root(self):
         """ Test the contents of webpage on root directory is accessed """
@@ -35,8 +39,9 @@ class TestMain(unittest.TestCase):
         self.assertEqual(host, '0.0.0.0', 'Invalid IP address.')
         self.assertEqual(port, 5000, 'Invalid port number.')
 
-
-
+    def test_validate_session(self):
+        """ Test valid session to check if it connects to production database """
+        self.assertTrue(main.validate_session(), 'Session is not valid')
 
 
 if __name__ == '__main__':
