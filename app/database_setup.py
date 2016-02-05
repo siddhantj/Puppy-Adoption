@@ -53,7 +53,11 @@ class PuppyAdopter(Base):
 class Adopter(Base):
     __tablename__ = 'adopter'
 
-    adopter_id = Column(Integer, primary_key=True)
+    adopter_id = Column(Integer, primary_key=True)  # Had to add because
+                                                    # sqlalchemy does let
+                                                    # create tables without
+                                                    # primary key
+    
     adopter_name = Column(String(100), nullable=False)
     puppy_id = Column(Integer, ForeignKey('puppy.puppy_id'))
     puppy_adopter = relationship('puppy_adopter', uselist=False, back_populates='adopter')
