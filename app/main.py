@@ -6,6 +6,7 @@ from app import flask_app
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from Utilities.util import database_connection_string
 
 
 @flask_app.route('/')
@@ -17,20 +18,14 @@ def welcome_page():
 
 def get_session():
     Base = declarative_base()
-    engine = create_engine('postgresql+psycopg2://testdb:hello@localhost/production_dogshelter')
+    engine = create_engine(database_connection_string)
     Base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     return session
 
 
-def validate_session():
-    try:
-        session = get_session()
-        connection = session.connection()
-        return True
-    except:
-        return False
+
 
 
 

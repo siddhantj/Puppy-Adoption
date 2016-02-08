@@ -39,10 +39,6 @@ class TestMain(unittest.TestCase):
         self.assertEqual(host, '0.0.0.0', 'Invalid IP address.')
         self.assertEqual(port, 5000, 'Invalid port number.')
 
-    def test_validate_session(self):
-        """ Test valid session to check if it connects to production database """
-        self.assertTrue(main.validate_session(), 'Session is not valid')
-
 
 if __name__ == '__main__':
     unittest.main()

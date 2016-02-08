@@ -5,6 +5,19 @@
     <title>Title</title>
 </head>
 <body>
+  {% if (result == 'No')  %}
+    <div>
+       <p> No shelters added yet. </p>
+    </div>
+  {% endif %}
+  {% if (result == 'Yes')  %}
+  {% for shelter in shelters  %}
+    <div>
+      <p>{{shelter.name}}</p>
+      <p>{{shelter.website}}</p>
+    </div>
+  {% endfor %}
+  {% endif %}
   <h1> Show all shelters</h1>
 
 </body>

@@ -22,7 +22,20 @@ class Shelter(Base):
     email = Column(String(100), nullable=False)
     current_occupancy = Column(String(100), nullable=False)
     maximum_occupancy = Column(String(100), nullable=False)
-    puppy = relationship('puppy', back_populates='shelter')  #uselist=True
+    puppy = relationship('Puppy', back_populates='shelter')  #uselist=True
+
+    def __init__(self, name=None, street=None, city=None, state=None,
+                 zipcode=None, website=None, email=None,
+                 current_occupancy=None, maximum_occupancy=None):
+        self.name = name
+        self.street = street
+        self.city = city
+        self.state = state
+        self.zipcode = zipcode
+        self.website = website
+        self.email = email
+        self.current_occupancy = current_occupancy
+        self.maximum_occupancy = maximum_occupancy
 
 
 class Puppy(Base):
@@ -36,31 +49,35 @@ class Puppy(Base):
     age = Column(Integer, nullable=False)
     picture = Column(String(300), nullable=False)
     shelter_id = Column(Integer, ForeignKey('shelter.shelter_id'))
-    shelter = relationship('shelter', uselist=False, back_populates='puppy')
-    puppy_adopter = relationship('puppy_adopter', uselist=False, back_populates='puppy')
+    shelter = relationship('Shelter', uselist=False, back_populates='puppy')
+    puppy_adopter = relationship('PuppyAdopter', uselist=False, back_populates='puppy')
 
 
 class PuppyAdopter(Base):
     __tablename__ = 'puppy_adopter'
 
-    serial_no = Column(Integer, primary_key=True)
+    serial_no = Column(Integer, primary_key=True)   # Had to add because
+                                                    # sqlalchemy does let
+                                                    # create tables without
+                                                    # primary key
     puppy_id = Column(Integer, ForeignKey('puppy.puppy_id'))
-    puppy = relationship('puppy', uselist=False, back_populates='puppy_profile')
+    puppy = relationship('Puppy', uselist=False, back_populates='puppy_adopter')
     adopter_id = Column(Integer, ForeignKey('adopter.adopter_id'))
-    adopter = relationship('adopter', back_populates='puppy_adopter')  #uselist=True
+    adopter = relationship('Adopter', back_populates='puppy_adopter')  #uselist=True
 
 
 class Adopter(Base):
     __tablename__ = 'adopter'
 
-    adopter_id = Column(Integer, primary_key=True)  # Had to add because
-                                                    # sqlalchemy does let
-                                                    # create tables without
-                                                    # primary key
-    
+    adopter_id = Column(Integer, primary_key=True)
     adopter_name = Column(String(100), nullable=False)
+    adopter_phone = Column(String(20), nullable=False)
+    street = Column(String(200), nullable=False)
+    city = Column(String(200), nullable=False)
+    state = Column(String(30), nullable=False)
+    zipcode = Column(Integer, nullable=False)
     puppy_id = Column(Integer, ForeignKey('puppy.puppy_id'))
-    puppy_adopter = relationship('puppy_adopter', uselist=False, back_populates='adopter')
+    puppy_adopter = relationship('PuppyAdopter', uselist=False, back_populates='adopter')
 
 if __name__ == '__main__':
     engine = create_engine('postgresql+psycopg2://testdb:hello@localhost/production_dogshelter')
