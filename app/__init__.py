@@ -16,3 +16,4 @@ import app.main
 import app.Shelter.show_all_shelters
 import app.Puppy.show_all_puppies
 import app.Adopter.show_all_adopters
+import app.Shelter.add_shelter

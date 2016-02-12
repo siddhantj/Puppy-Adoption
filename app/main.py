@@ -6,7 +6,7 @@ from app import flask_app
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from Utilities.util import database_connection_string
+from Utilities.util import production_db_string
 
 
 @flask_app.route('/')
@@ -14,18 +14,5 @@ from Utilities.util import database_connection_string
 def welcome_page():
     # pdb.set_trace()
     return render_template('index.html')
-
-
-def get_session():
-    Base = declarative_base()
-    engine = create_engine(database_connection_string)
-    Base.metadata.bind = engine
-    DBSession = sessionmaker(bind=engine)
-    session = DBSession()
-    return session
-
-
-
-
 
 

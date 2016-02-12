@@ -19,6 +19,12 @@
   {% endfor %}
   {% endif %}
   <h1> Show all shelters</h1>
+  <input type="button", value="Add shelter" onclick="add_shelter()">
+  <script>
+    function add_shelter() {
+      window.location = '/show_all_shelter/add_shelter'
+    }
+  </script>
 
 </body>
 </html>
