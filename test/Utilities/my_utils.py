@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -11,7 +10,7 @@ test_db_string = 'postgresql+psycopg2://testdb:hello@localhost/' \
                        'test_dogshelter'
 
 
-def get_session(database_connection_string):
+def get_test_session(database_connection_string):
     try:
         Base = declarative_base()
         engine = create_engine(database_connection_string)
@@ -24,5 +23,3 @@ def get_session(database_connection_string):
         return None
     except ArgumentError:
         return None
-
-

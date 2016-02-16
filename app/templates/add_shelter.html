@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+     #shelter_name {
+
+       margin-left:50px;
+     }
+     .shelter {
+
+        margin-left:100px;
+        margin-top:20px
+     }
+</style>
 </head>
 <body>
   <h1>  Add Shelter.</h1>
-  <form>
-    <p> Shelter name: </p>
-    <input type="text" id="shelter_name"><br/>
-    <input type="text" id="shelter_street_address">
+  <form action='{{url_for("add_shelter")}}' method="post"> <!-- input validation should be done at client side -->
+      Name:
+      <input type="text" name="shelter_name" class="shelter"><br>
+      Street:
+      <input type="text" name="shelter_street" class="shelter"><br>
+      City:
+      <input type="text" name="shelter_city" class="shelter"><br>
+      State:
+      <input type="text" name="shelter_state" class="shelter"><br>
+      Zipcode:
+      <input type="text" name="shelter_zipcode" class="shelter"><br>
+      Website:
+      <input type="text" name="shelter_website" class="shelter"><br>
+      Email:
+      <input type="text" name="shelter_email" class="shelter"><br>
+      Current Occupancy:
+      <input type="text" name="shelter_curroccupancy" class="shelter"><br>
+      Maximum Occupancy:
+      <input type="text" name="shelter_maxoccupancy" class="shelter"><br>
+      <input type="submit" value="Submit">
   </form>
 
 </body>
 </html>
+
+<!-- <form action="/show_all_shelter/add_shelter" method="post"> <!-- input validation should be done at client side -->

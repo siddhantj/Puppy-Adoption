@@ -1,24 +1,39 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from os import path
-import sys
-sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 from app import flask_app
-from Utilities.util import production_db_string, test_db_string, get_session
+from app.Utilities.util import test_db_string, get_session
 from app.database_setup import Shelter
 
-from flask import render_template
+import pdb
+
+from flask import render_template, request, redirect, url_for
 
 
-@flask_app.route('/show_all_shelter/add_shelter')
-@flask_app.route('/show_all_shelter/add_shelter')
+@flask_app.route('/show_all_shelters/add_shelter', methods=['POST', 'GET'])
+@flask_app.route('/show_all_shelters/add_shelter', methods=['POST', 'GET'])
 def add_shelter():
-    # session = get_session(test_db_string)
-    # session.connection()
-    # shelter = Shelter('Hope for Paws', '2611 Monmouth Avenue',
-    #                   'Los Angeles', 'CA', 94583, 'hopeforpaws.org',
-    #                   'contact_us@hopeforpaws.org', 0, 10)
-    # session.add(shelter)
-    # session.commit()
-    return render_template('add_shelter.html')
+    if request.method == 'POST':
+        # pdb.set_trace()
+        print 'I got POST response'  # protect code from sql and code injection
+        name = request.form['shelter_name']
+        street = request.form['shelter_street']
+        city = request.form['shelter_city']
+        state = request.form['shelter_state']
+        zipcode = int(request.form['shelter_zipcode'])
+        website = request.form['shelter_website']
+        email = request.form['shelter_email']
+        current_occupancy = int(request.form['shelter_curroccupancy'])
+        max_occupancy = int(request.form['shelter_maxoccupancy'])
+        shelter = Shelter(name, street, city, state, zipcode, website,
+                          email, current_occupancy, max_occupancy)
+        session = get_session(test_db_string)
+        session.add(shelter)
+        # Get that object
+        shelters = session.query(Shelter).all()
+        for ind_shelter in shelters:
+            print "%s %s" % (ind_shelter.name, ind_shelter.street)
+        # session.commit()
+        return redirect(url_for('show_all_shelters'))
+    else:
+        return render_template('add_shelter.html')

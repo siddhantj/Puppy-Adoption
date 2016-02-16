@@ -8,7 +8,7 @@ from app.database_setup import Shelter, Puppy, Adopter, PuppyAdopter
 import unittest
 
 import pdb
-from app.main import get_session
+from app.Utilities.util import get_session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -118,8 +118,8 @@ class TestDatabaseSetup(unittest.TestCase):
         self.assertEqual(my_columns.__len__(), 0, 'Adopter table not '
                                                   'properly created')
 
-
-
+if __name__ == '__main__':
+    unittest.main()
 
 
 

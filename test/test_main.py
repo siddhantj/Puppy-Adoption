@@ -1,13 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import unittest
 import sys
 from os import path
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 # sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from app import flask_app, main
+from app import flask_app
 import runserver
+
+import pdb
+import unittest
 
 
 class TestMain(unittest.TestCase):
@@ -24,13 +26,13 @@ class TestMain(unittest.TestCase):
         """ Test the contents of webpage on root directory is accessed """
         # pdb.set_trace()
         response = self.app.get('/')
-        assert '<h1> Hello World</h1>' in response.data
+        assert '<h1> This is welcome page </h1>' in response.data
         self.assertEqual(200, response.status_code, 'Status code is not 200')
 
     def test_welcome_page_index_file(self):
         """ Test the contents of webpage when main page is accessed """
         response = self.app.get('/index.html')
-        assert '<h1> Hello World</h1>' in response.data
+        assert '<h1> This is welcome page </h1>' in response.data
         self.assertEqual(200, response.status_code, 'Status code is not 200')
 
     def test_server_up_on_correct_ip_correct_port(self):

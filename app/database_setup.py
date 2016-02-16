@@ -20,8 +20,8 @@ class Shelter(Base):
     zipcode = Column(Integer, nullable=False)
     website = Column(String(100), nullable=False)
     email = Column(String(100), nullable=False)
-    current_occupancy = Column(String(100), nullable=False)
-    maximum_occupancy = Column(String(100), nullable=False)
+    current_occupancy = Column(Integer, nullable=False)
+    maximum_occupancy = Column(Integer, nullable=False)
     puppy = relationship('Puppy', back_populates='shelter')  #uselist=True
 
     def __init__(self, name=None, street=None, city=None, state=None,
