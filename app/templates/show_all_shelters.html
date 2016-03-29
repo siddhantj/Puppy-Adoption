@@ -3,28 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Show All Shelter</title>
+    <style>
+      #add_shelter {
+        margin-left: 1200px;
+      }
+      h1 {
+        text-align: center;
+      }
+      table, th, td {
+        border-style: solid;
+        border-width: 1px;
+        border-collapse: collapse;
+        text-align: center
+      }
+      table {
+        margin-left:443px;
+      }
+
+    </style>
 </head>
 <body>
+  <h1> Show all shelters</h1>
   {% if (result == 'No')  %}
     <div>
        <p> No shelters added yet. </p>
     </div>
   {% endif %}
   {% if (result == 'Yes')  %}
-  {% for shelter in shelters  %}
-    <div>
-      <p>{{shelter.name}}</p>
-      <p>{{shelter.website}}</p>
-    </div>
+  <table>
+    <tr>
+      <th>Shelter Id</th>
+      <th>Name</th>
+      <th>Current Occupancy</th>
+      <th>Max Occupancy</th>
+    </tr>
+    {% for shelter in shelters  %}
+    <tr>
+      <td><a href="/show_all_shelters/{{ shelter.shelter_id }}">{{shelter.shelter_id}}</a> </td>
+      <td>{{shelter.name}}</td>
+      <td>{{shelter.current_occupancy}}</td>
+      <td>{{shelter.maximum_occupancy}}</td>
+    </tr>
   {% endfor %}
+  </table>
   {% endif %}
-  <h1> Show all shelters</h1>
-  <input type="button", value="Add shelter" onclick="add_shelter()">
+
+  <input type="button", id="add_shelter" value="Add shelter" onclick="add_shelter()">
   <script>
     function add_shelter() {
       window.location = '/show_all_shelters/add_shelter'
     }
   </script>
-
+  <p hidden>show_all_shelter.html</p>
 </body>
 </html>

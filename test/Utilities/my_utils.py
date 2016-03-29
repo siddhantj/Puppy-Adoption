@@ -6,9 +6,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.exc import OperationalError, ArgumentError
 
-test_db_string = 'postgresql+psycopg2://testdb:hello@localhost/' \
-                       'test_dogshelter'
-
 
 def get_test_session(database_connection_string):
     try:

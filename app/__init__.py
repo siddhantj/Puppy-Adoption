@@ -14,6 +14,9 @@ flask_app = Flask(__name__)  # Always in this order otherwise app won't be impor
 
 import app.main
 import app.Shelter.show_all_shelters
+import app.Shelter.add_shelter
+import app.Shelter.editdelete_shelter
+
 import app.Puppy.show_all_puppies
 import app.Adopter.show_all_adopters
-import app.Shelter.add_shelter
+
